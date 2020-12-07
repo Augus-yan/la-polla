@@ -4,7 +4,7 @@
  * @Author: 严田田
  * @Date: 2020-12-07 16:05:23
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-07 17:01:10
+ * @LastEditTime: 2020-12-07 20:17:40
  */
 import Vue from 'vue'
 import App from './App.vue'
@@ -12,6 +12,14 @@ import router from './router'
 import store from './store'
 // 加载全局样式
 import './styles/index.less'
+
+// 加载vant核心组件
+import Vant from 'vant'
+// 加载vant文件夹
+import 'vant/lib/index.css'
+
+// 注册vant
+Vue.use(Vant)
 
 Vue.config.productionTip = false
 
