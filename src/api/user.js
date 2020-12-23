@@ -4,7 +4,7 @@
  * @Author: 严田田
  * @Date: 2020-12-08 15:35:43
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-13 15:39:08
+ * @LastEditTime: 2020-12-23 15:42:25
  */
 
 // 加载封装请求路径
@@ -23,5 +23,16 @@ export const sendSms = mobile => {
   return request({
     url: ` /v1_0/sms/codes/${mobile}`,
     method: 'GET'
+  })
+}
+
+// 获取用户自己信息
+export const getUserInfo = () => {
+  return request({
+    url: '/v1_0/user',
+    method: 'GET'
+    // headers: {
+    //   Authorization: `Bearer ${store.state.user.token}`
+    // }
   })
 }

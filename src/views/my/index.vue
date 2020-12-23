@@ -4,7 +4,7 @@
  * @Author: 严田田
  * @Date: 2020-12-20 17:46:08
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-22 20:31:05
+ * @LastEditTime: 2020-12-23 14:56:42
 -->
 <template>
   <div class="my-container">
@@ -12,12 +12,8 @@
     <div v-if="user" class="header info-login">
       <div class="base-login">
         <div class="left">
-          <van-image
-            class="avater"
-            round
-            src="https://img.yzcdn.cn/vant/cat.jpeg"
-          />
-          <span class="name">你的专属</span>
+          <van-image class="avater" round :src="userInfo.photo" />
+          <span class="name">{{ userInfo.name }}</span>
         </div>
         <div class="right">
           <van-button class="btn-login" size="mini" round>编辑资料</van-button>
@@ -25,19 +21,19 @@
       </div>
       <div class="data-login">
         <div class="data-item">
-          <span class="count">10</span>
+          <span class="count">{{ userInfo.art_count }}</span>
           <span class="text">头条</span>
         </div>
         <div class="data-item">
-          <span class="count">10</span>
+          <span class="count">{{ userInfo.follow_count }}</span>
           <span class="text">关注</span>
         </div>
         <div class="data-item">
-          <span class="count">10</span>
+          <span class="count">{{ userInfo.fans_count }}</span>
           <span class="text">粉丝</span>
         </div>
         <div class="data-item">
-          <span class="count">10</span>
+          <span class="count">{{ userInfo.like_count }}</span>
           <span class="text">获赞</span>
         </div>
       </div>
@@ -61,20 +57,29 @@
       </van-grid-item>
     </van-grid>
     <!-- 设置 -->
-    <van-cell clickable title="消息通知" is-link url="" />
-    <van-cell clickable title="用户反馈" is-link url="" />
-    <van-cell clickable title="小智同学" is-link url="" />
-    <van-cell v-if="user" clickable class="cell-btn" title="退出登录" />
+    <van-cell title="消息通知" is-link url="" />
+    <van-cell title="用户反馈" is-link url="" />
+    <van-cell title="小智同学" is-link url="" />
+    <van-cell
+      v-if="user"
+      @click="onLogout"
+      clickable
+      class="cell-btn"
+      title="退出登录"
+    />
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import { getUserInfo } from '../../api/user'
 export default {
   name: 'MyIndex',
   props: [''],
   data() {
-    return {}
+    return {
+      userInfo: {} // 用户信息
+    }
   },
 
   components: {},
@@ -82,12 +87,49 @@ export default {
   computed: {
     ...mapState(['user'])
   },
-
+  created() {
+    // 用户登录之后马上加载
+    // user从vuex中获取，如果有user就马上加载
+    if (this.user) {
+      this.loadUserInfo()
+    }
+  },
   beforeMount() {},
 
   mounted() {},
 
-  methods: {},
+  methods: {
+    // 点击退出操作
+    onLogout() {
+      this.$dialog
+        .confirm({
+          title: '确认退出',
+          message: '亲爱的大大您确定要退出吗？不要走，留下来好不好嘛'
+        })
+        .then(() => {
+          // on confirm
+          // 确认退出 执行清除用户登录信息，和本地存储信息
+          this.$store.commit('setUser', null)
+        })
+        .catch(() => {
+          // on cancel
+          // 取消执行这里
+          console.log('取消执行这里')
+        })
+    },
+    // 获取用户自己信息
+    async loadUserInfo() {
+      try {
+        const { data } = await getUserInfo()
+        // console.log(data, '用户信息')
+        // 把请求到的用户信息赋值给userInfo
+        this.userInfo = data
+      } catch (error) {
+        // 请求失败之后给一个提示消息
+        this.$toast.fail('获取用户信息失败！')
+      }
+    }
+  },
 
   watch: {}
 }
