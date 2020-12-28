@@ -4,7 +4,7 @@
  * @Author: 严田田
  * @Date: 2020-12-20 17:21:17
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-22 20:40:15
+ * @LastEditTime: 2020-12-24 16:50:14
 -->
 <template>
   <div class="layout-container">
@@ -59,6 +59,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .layout-container {
+  padding-bottom: 100px;
   .layout-icon {
     i.iconfont {
       font-size: 40px;

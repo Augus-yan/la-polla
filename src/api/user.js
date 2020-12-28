@@ -4,7 +4,7 @@
  * @Author: 严田田
  * @Date: 2020-12-08 15:35:43
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-23 15:42:25
+ * @LastEditTime: 2020-12-24 15:01:29
  */
 
 // 加载封装请求路径
@@ -34,5 +34,13 @@ export const getUserInfo = () => {
     // headers: {
     //   Authorization: `Bearer ${store.state.user.token}`
     // }
+  })
+}
+
+// 获取用户自己信息
+export const getUserChannels = () => {
+  return request({
+    url: '/v1_0/user/channels',
+    method: 'GET'
   })
 }

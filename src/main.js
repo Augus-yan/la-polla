@@ -4,7 +4,7 @@
  * @Author: 严田田
  * @Date: 2020-12-07 16:05:23
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-08 14:28:33
+ * @LastEditTime: 2020-12-28 14:18:40
  */
 import Vue from 'vue'
 import App from './App.vue'
@@ -20,6 +20,9 @@ import 'vant/lib/index.css'
 
 // 动态设置 REM 基准值
 import 'amfe-flexible'
+
+// 加载dayjs
+import './utils/dayjs'
 
 // 注册vant
 Vue.use(Vant)
