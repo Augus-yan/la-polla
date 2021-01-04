@@ -4,7 +4,7 @@
  * @Author: 严田田
  * @Date: 2020-12-20 17:42:00
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-26 17:43:11
+ * @LastEditTime: 2020-12-30 16:59:09
 -->
 <template>
   <div class="hone-container">
@@ -30,31 +30,57 @@
         <article-list :channel="channel"></article-list>
       </van-tab>
       <dir slot="nav-right" class="placeholder"></dir>
-      <div slot="nav-right" class="hamburger-btn">
+      <div
+        slot="nav-right"
+        class="hamburger-btn"
+        @click="isChannelEiatShow = true"
+      >
         <i class="iconfont icongengduo"></i>
       </div>
     </van-tabs>
+    <!-- 频道汉堡弹出列表 -->
+    <van-popup
+      v-model="isChannelEiatShow"
+      closeable
+      position="bottom"
+      close-icon-position="top-left"
+      :style="{ height: '100%' }"
+    >
+      <!-- 汉堡按钮频道内容 -->
+      <channel-edit
+        :myChannels="channels"
+        :active="active"
+        @updated-active="onUpdatedActive"
+      ></channel-edit>
+    </van-popup>
   </div>
 </template>
 
 <script>
 import { getUserChannels } from '../../api/user'
 import ArticleList from './components/article.list'
+import ChannelEdit from './components/channel.edit'
+import { mapState } from 'vuex'
+import { getItem } from '../../utils/storage'
 export default {
   name: 'HomeIndex',
   props: [''],
   data() {
     return {
       active: 0,
-      channels: [] // 频道列表
+      channels: [], // 频道列表
+      isChannelEiatShow: false // 频道弹出按钮状态
     }
   },
 
   components: {
-    ArticleList
+    ArticleList,
+    ChannelEdit
   },
 
-  computed: {},
+  computed: {
+    ...mapState(['user'])
+  },
   created() {
     this.loadUserChannels()
   },
@@ -65,12 +91,38 @@ export default {
   methods: {
     async loadUserChannels() {
       try {
-        const { data } = await getUserChannels()
-        // console.log(data)
-        this.channels = data.data.channels
+        // 定义一个数组
+        let channels = []
+        // 判断用户是否登录
+        if (this.user) {
+          // 如果登录直接保存到线上
+          const { data } = await getUserChannels()
+          channels = data.data.channels
+        } else {
+          // 未登录保存到本地
+          const localChannels = getItem('TOUTIAO_CHANNELS')
+          // 判断本地存储是否有数据
+          if (localChannels) {
+            // 有就直接用本地
+            channels = localChannels
+          } else {
+            // 没有就用默认的
+            const { data } = await getUserChannels()
+            channels = data.data.channels
+          }
+        }
+        // 添加给频道列表
+        this.channels = channels
       } catch (error) {
         this.$toast.fail('获取数据失败')
       }
+    },
+    // 子组件非编辑状态执行切换频道
+    onUpdatedActive(index, isChannelEiatShow = true) {
+      // 子组件传递过来的索引赋值给active 来切换频道
+      this.active = index
+      // 关闭弹层
+      this.isChannelEiatShow = isChannelEiatShow
     }
   },
 
