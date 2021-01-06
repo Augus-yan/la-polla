@@ -4,7 +4,7 @@
  * @Author: 严田田
  * @Date: 2020-12-07 16:05:23
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-20 17:54:49
+ * @LastEditTime: 2021-01-05 09:14:51
  */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
@@ -46,6 +46,12 @@ const routes = [
         component: () => import('@/views/my/index.vue')
       }
     ]
+  },
+  // 搜索页面
+  {
+    path: '/search',
+    name: 'search',
+    component: () => import('@/views/search/index.vue')
   }
 ]
 

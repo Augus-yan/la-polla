@@ -4,7 +4,7 @@
  * @Author: 严田田
  * @Date: 2020-12-20 17:42:00
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-30 16:59:09
+ * @LastEditTime: 2021-01-05 09:16:03
 -->
 <template>
   <div class="hone-container">
@@ -16,6 +16,7 @@
         size="small"
         round
         icon="search"
+        to="/search"
         >搜索</van-button
       >
     </van-nav-bar>
