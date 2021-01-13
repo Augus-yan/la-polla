@@ -4,7 +4,7 @@
  * @Author: 严田田
  * @Date: 2021-01-05 09:49:54
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-01-06 13:59:18
+ * @LastEditTime: 2021-01-08 17:01:07
 -->
 <template>
   <div class="content-container">
@@ -16,17 +16,24 @@
       finished-text="没有更多了"
       @load="onLoad"
     >
-      <van-cell
+      <!-- 文章列表项组件 -->
+      <article-item
+        v-for="(article, index) in list"
+        :key="index"
+        :article="article"
+      ></article-item>
+      <!-- <van-cell
         v-for="(content, index) in list"
         :key="index"
         :title="content.title"
-      />
+      /> -->
     </van-list>
   </div>
 </template>
 
 <script>
 import { getContent } from '../../../api/search'
+import ArticleItem from '../../../components/article.item'
 export default {
   name: 'searchContent',
   props: {
@@ -46,7 +53,9 @@ export default {
     }
   },
 
-  components: {},
+  components: {
+    ArticleItem
+  },
 
   computed: {},
 
@@ -67,7 +76,7 @@ export default {
         // if (Math.random() > 0.5) {
         //   JSON.parse('gshd')
         // }
-        // console.log(data, '结果数据')
+        console.log(data, '结果数据')
         // 2.将数据添加到list列表
         const { results } = data.data
         this.list.push(...results)

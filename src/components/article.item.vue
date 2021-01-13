@@ -4,10 +4,23 @@
  * @Author: 严田田
  * @Date: 2020-12-27 23:28:37
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-28 14:53:18
+ * @LastEditTime: 2021-01-07 09:44:21
 -->
 <template>
-  <van-cell class="article-item">
+  <!-- :to="'/atticle/'+ article.art_id" -->
+  <!-- :to="`/article/${article.art_id}`" -->
+  <van-cell
+    class="article-item"
+    :to="{
+      // 根据路由名称进行跳转
+      name: 'article',
+      // 传递路由动态参数
+      params: {
+        // 属性名：路由路径中设计的动态参数名称
+        articleId: article.art_id
+      }
+    }"
+  >
     <div class="title van-multi-ellipsis--l2" slot="title">
       {{ article.title }}
     </div>

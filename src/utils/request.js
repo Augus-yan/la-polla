@@ -4,17 +4,30 @@
  * @Author: 严田田
  * @Date: 2020-12-08 10:49:01
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-23 15:36:00
+ * @LastEditTime: 2021-01-07 15:18:58
  */
 // 引进axios
 import axios from 'axios'
 import store from '../store/index'
-
+import JSONBig from 'json-bigint'
 // 创建axios.create模块 request进行接收
 const request = axios.create({
   // baseURL: 'http://ttapi.research.itcast.cn/', // 基础路径
-  baseURL: 'http://toutiao-app.itheima.net/' // 基准路径
+  baseURL: 'http://toutiao-app.itheima.net/', // 基准路径
   // baseURL: 'http://api-toutiao-web.itheima.net/app/', // 基准路径
+
+  // transformResponse 允许自定义原始的响应数据（字符串）
+  transformResponse: [
+    function(data) {
+      try {
+        // 如果转换成功则返回转换的数据结果
+        return JSONBig.parse(data)
+      } catch (error) {
+        // 如果转换失败，则包装为统一数据格式并返回
+        return data
+      }
+    }
+  ]
 })
 
 // 请求拦截器

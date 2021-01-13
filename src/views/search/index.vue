@@ -4,7 +4,7 @@
  * @Author: 严田田
  * @Date: 2021-01-05 09:11:51
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-01-06 15:40:18
+ * @LastEditTime: 2021-01-08 09:22:46
 -->
 <template>
   <div class="search-container">
@@ -52,7 +52,7 @@ export default {
     return {
       searchText: '', // 输入的内容
       isResultShow: false, // 控制搜索结果的展示
-      searchHistory: getItem('TOUTIAO_SEARCH_HISTORYS') || [] // 搜索的历史记录数据
+      searchHistory: getItem('TOUTIAO_SEARCH_HISTORYS') || [] // 获取搜索的历史记录数据;空数组是如果没有数据会报错
     }
   },
 

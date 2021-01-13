@@ -4,7 +4,7 @@
  * @Author:
  * @Date: 2020-12-07 16:11:22
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-07 20:51:50
+ * @LastEditTime: 2021-01-08 10:40:13
  */
 module.exports = {
   // 配置要使用的 PostCSS 插件
@@ -24,7 +24,10 @@ module.exports = {
       rootValue({ file }) {
         return file.indexOf('vant') !== -1 ? 37.5 : 75
       },
-      propList: ['*']
+      propList: ['*'],
+
+      // 配置不要转换的样式资源
+      exclude: 'github-markdown'
     }
   }
 }

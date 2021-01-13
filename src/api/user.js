@@ -4,7 +4,7 @@
  * @Author: 严田田
  * @Date: 2020-12-08 15:35:43
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-24 15:01:29
+ * @LastEditTime: 2021-01-08 15:40:14
  */
 
 // 加载封装请求路径
@@ -42,5 +42,24 @@ export const getUserChannels = () => {
   return request({
     url: '/v1_0/user/channels',
     method: 'GET'
+  })
+}
+
+// 添加关注
+export const addFollow = target => {
+  return request({
+    url: 'POST',
+    method: '/v1_0/user/followings',
+    data: {
+      target
+    }
+  })
+}
+
+// 取消关注
+export const deleteFollow = target => {
+  return request({
+    url: `/v1_0/user/followings/${target}`,
+    method: 'DELETE'
   })
 }
