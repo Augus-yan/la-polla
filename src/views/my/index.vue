@@ -4,7 +4,7 @@
  * @Author: 严田田
  * @Date: 2020-12-20 17:46:08
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-25 11:12:36
+ * @LastEditTime: 2021-01-14 09:57:29
 -->
 <template>
   <div class="my-container">
@@ -16,7 +16,9 @@
           <span class="name">{{ userInfo.name }}</span>
         </div>
         <div class="right">
-          <van-button class="btn-login" size="mini" round>编辑资料</van-button>
+          <van-button to="/user/profile" class="btn-login" size="mini" round
+            >编辑资料</van-button
+          >
         </div>
       </div>
       <div class="data-login">

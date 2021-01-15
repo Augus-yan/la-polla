@@ -4,7 +4,7 @@
  * @Author: 严田田
  * @Date: 2020-12-08 15:35:43
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-01-08 15:40:14
+ * @LastEditTime: 2021-01-15 10:39:29
  */
 
 // 加载封装请求路径
@@ -61,5 +61,32 @@ export const deleteFollow = target => {
   return request({
     url: `/v1_0/user/followings/${target}`,
     method: 'DELETE'
+  })
+}
+
+// 获取用户的个人信息
+
+export const getProfile = () => {
+  return request({
+    url: '/v1_0/user/profile',
+    method: 'GET'
+  })
+}
+
+// 编辑用户个人资料
+export const patchProfile = data => {
+  return request({
+    url: '/v1_0/user/profile',
+    method: 'PATCH',
+    data
+  })
+}
+
+// 编辑用户照片资料（头像、身份证照片）
+export const patchPhoto = data => {
+  return request({
+    url: '/v1_0/user/photo',
+    method: 'PATCH',
+    data
   })
 }

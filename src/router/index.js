@@ -4,7 +4,7 @@
  * @Author: 严田田
  * @Date: 2020-12-07 16:05:23
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-01-07 09:45:30
+ * @LastEditTime: 2021-01-14 09:55:42
  */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
@@ -59,6 +59,12 @@ const routes = [
     name: 'article',
     component: () => import('@/views/article/index.vue'),
     props: true
+  },
+  // 用户资料详情页面
+  {
+    path: '/user/profile',
+    name: 'user-profile',
+    component: () => import('@/views/user-profile/index.vue')
   }
 ]
 

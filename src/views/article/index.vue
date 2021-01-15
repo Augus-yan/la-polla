@@ -4,12 +4,17 @@
  * @Author: 严田田
  * @Date: 2021-01-06 16:51:52
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-01-13 13:49:52
+ * @LastEditTime: 2021-01-14 10:06:23
 -->
 <template>
   <div class="article-container">
     <!-- 导航栏 -->
-    <van-nav-bar class="page-nav-bar" left-arrow title="今日头条"></van-nav-bar>
+    <van-nav-bar
+      class="page-nav-bar"
+      @click-left="$router.back()"
+      left-arrow
+      title="今日头条"
+    ></van-nav-bar>
     <!-- /导航栏 -->
 
     <div class="main-wrap">
